@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
 
 export default interface Posts {
+    _id?: ObjectId,
     posts: Post[]
 }
 
