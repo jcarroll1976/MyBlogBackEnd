@@ -1,8 +1,0 @@
-
-{
-    "mongodb": {
-      "uri": "mongodb+srv://zettafan40:iqLU1PZQygJClnHr@cluster0.jfo9asr.mongodb.net/blogposts?retryWrites=true&w=majority"
-    }
-   }
-   
-   
