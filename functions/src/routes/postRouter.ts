@@ -35,7 +35,9 @@ postRouter.get("/posts/:id", async (req, res) => {
    } else {
      res.status(404).json({message: "Not Found"});
    }
- } catch (err) { ... }
+ } catch (err) {
+    errorResponse(err, res);
+ }
 });
 
 // create new Post
@@ -47,7 +49,9 @@ postRouter.post("/posts", async (req, res) => {
        .collection<Post>("posts")
        .insertOne(post);
    res.status(201).json(post);
- } catch (err) { ... }
+ } catch (err) {
+    errorResponse(err, res);
+  }
 });
 
 // delete Post by ID
@@ -62,7 +66,9 @@ postRouter.delete("/posts/:id", async (req, res) => {
    } else {
      res.status(404).json({message: "Not Found"});
    }
- } catch (err) { ... }
+ } catch (err) {
+    errorResponse(err, res);
+ }
 });
 
 // replace / update Post by ID
@@ -80,7 +86,9 @@ postRouter.put("/posts/:id", async (req, res) => {
    } else {
      res.status(404).json({ message: "Not Found" });
    }
- } catch (err) { ... }
+ } catch (err) {
+    errorResponse(err, res);
+  }
 });
 
 export default postRouter;
