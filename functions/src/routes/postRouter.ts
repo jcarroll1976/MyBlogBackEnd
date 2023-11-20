@@ -91,4 +91,34 @@ postRouter.put("/posts/:id", async (req, res) => {
   }
 });
 
+//handling query params
+postRouter.get("/students", async (req, res) => {
+ try {
+   const title: string | null = (req.query.title as string) || null;
+   const author: string | null = req.query.author as string || null;
+   const category: string | null = req.query.category as string || null;
+
+    const query: any = {};
+
+    if (title) {
+      query.title = title;
+    }
+
+    if (author) {
+      query.author = author;
+    }
+
+    if (category) {
+      query.category = category;
+    }
+
+    const client = await getClient();
+    const cursor = client.db().collection<Post>("posts").find(query);
+    const results = await cursor.toArray();
+    res.status(200).json(results);
+  } catch (err) {
+    errorResponse(err, res);
+  }
+});
+
 export default postRouter;
