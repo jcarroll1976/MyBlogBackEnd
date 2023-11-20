@@ -92,7 +92,7 @@ postRouter.put("/posts/:id", async (req, res) => {
 });
 
 //handling query params
-postRouter.get("/students", async (req, res) => {
+postRouter.get("/posts", async (req, res) => {
  try {
    const title: string | null = (req.query.title as string) || null;
    const author: string | null = req.query.author as string || null;
@@ -116,6 +116,20 @@ postRouter.get("/students", async (req, res) => {
     const cursor = client.db().collection<Post>("posts").find(query);
     const results = await cursor.toArray();
     res.status(200).json(results);
+  } catch (err) {
+    errorResponse(err, res);
+  }
+});
+
+// Get all posts in a specific category
+postRouter.get("/posts/category/:category", async (req,res) => {
+  try {
+    const category: string = req.params.category;
+
+    const client = await getClient();
+    const posts = await client.db().collection<Post>('posts').find({ category }).toArray();
+
+    res.status(200).json(posts);
   } catch (err) {
     errorResponse(err, res);
   }
